@@ -1,7 +1,6 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_huggingface import HuggingFaceEndpoint
 import chromadb
 from chromadb.config import Settings
 import re
@@ -14,7 +13,6 @@ print(loader)
 
 docs=loader.load()
 
-pprint.pp(docs[0].metadata)
 
 
 """ we use the RecursiveCharacterTextSplitter to maintain the context and paragraphs intact"""
@@ -47,16 +45,15 @@ collection.upsert(documents=texts,embeddings=vectors,metadatas=metadata,ids=ids)
 
 print(f"Numebr of Inserted were : {collection.count()}")
 
-query="How does top management demonstrate leadership and commitment to the ISMS?"
+query=input("Enter the Query :")
+topk=int(input("Enter the TOP K value :"))
 
 query_vector=embedings.embed_query(query)
 
 results=collection.query(
   query_embeddings=[query_vector],
-  n_results=5
+  n_results=topk
 )
-
-
 
 retrived_docs=results["documents"][0]
 retrived_distances=results["distances"][0]
