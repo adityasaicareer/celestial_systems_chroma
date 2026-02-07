@@ -122,7 +122,7 @@ The above code snippet will represents the embeding of the query using embed_que
 ![Chroma Output](./chroma5.png)
 ![Chroma Output](./chroma6.png)
 
-### Query 2: What are the key steps involved in the information security risk assessment process?
+### Query 3: What are the key steps involved in the information security risk assessment process?
 ### TOP K=3
 
 ![Chroma Output](./chroma7.png)
