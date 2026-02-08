@@ -4,10 +4,11 @@
 
 **This code is not compatable with latest version of python 3.14**
 
-**Steps to run the Code**
-
+**Steps to Run the Code**
+* git clone https://github.com/adityasaicareer/celestial_systems_chroma.git
+* cd celestial_systems_chroma
 * pip install -r requirements.txt
-* python3 rag_chroma.py
+* python rag_chroma.py
 
 **Libraries Required**
 
