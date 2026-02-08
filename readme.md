@@ -4,6 +4,11 @@
 
 **This code is not compatable with latest version of python 3.14**
 
+**Rationale for Chroma and all-MiniLM-L6-v2**
+
+* ChromaDB was chosen because it offers a simple, developer-friendly vector database with built-in persistence and metadata support, requiring minimal setup
+* all-MiniLM-L6-v2 widely used in Industry and Research , Provides fast inference and low memory usage and low dimention (384) embeding
+
 **Steps to Run the Code**
 * git clone https://github.com/adityasaicareer/celestial_systems_chroma.git
 * cd celestial_systems_chroma
