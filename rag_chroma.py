@@ -9,17 +9,12 @@ import pprint
 filepath="./example.pdf"
 
 loader=PyPDFLoader(filepath)
-print(loader)
 
 docs=loader.load()
-
-
 
 """ we use the RecursiveCharacterTextSplitter to maintain the context and paragraphs intact"""
 
 text_splitter=RecursiveCharacterTextSplitter(chunk_size=500,chunk_overlap=100)
-
-
 
 chunks=text_splitter.split_documents(docs)
 
@@ -47,7 +42,6 @@ def clean_text(text):
   text=re.sub(r'\.{3,}','',text)
   return text
 
-print(f"Numebr of Inserted were : {collection.count()}")
 
 samplequery="How does top management demonstrate leadership and commitment to the ISMS?"
 sampletopk=5
@@ -69,7 +63,6 @@ def queryresponse(embedings,query,collection,topk):
   ids=results["ids"][0]
   metadatas=results["metadatas"][0]
   distances=results["distances"][0]
-  print(len(results["documents"]))
 
   print(f"The Query : {query}")
   print(f"TOP K : {topk}")
