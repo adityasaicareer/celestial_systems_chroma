@@ -42,43 +42,64 @@ vectors=embedings.embed_documents(texts)
 
 collection.upsert(documents=texts,embeddings=vectors,metadatas=metadata,ids=ids)
 
-
-print(f"Numebr of Inserted were : {collection.count()}")
-
-query=input("Enter the Query :")
-topk=int(input("Enter the TOP K value :"))
-
-query_vector=embedings.embed_query(query)
-
-results=collection.query(
-  query_embeddings=[query_vector],
-  n_results=topk
-)
-
-retrived_docs=results["documents"][0]
-retrived_distances=results["distances"][0]
-ids=results["ids"][0]
-metadatas=results["metadatas"][0]
-distances=results["distances"][0]
-print(len(results["documents"]))
-
 def clean_text(text):
   text=re.sub(r'\s+',' ',text)
   text=re.sub(r'\.{3,}','',text)
   return text
 
-for index,(doc,dist,id,metadata,distance) in enumerate(zip(retrived_docs,retrived_distances,ids,metadatas,distances)):
-  print("\n")
-  print("-"*40)
-  print(f"Result : {index+1}")
-  print("\n")
-  print(f"\n chunk ID :{id}")
-  print("\n")
-  print(f"Chunk Text : {doc}")
-  print("\n")
-  print(f"Page : {metadata['page']}")
-  print("\n")
-  print(f"Source : {metadata['source']}")
-  print("\n")
-  print(f"Score : {distance}")
+print(f"Numebr of Inserted were : {collection.count()}")
+
+samplequery="How does top management demonstrate leadership and commitment to the ISMS?"
+sampletopk=5
+
+
+
+def queryresponse(embedings,query,collection,topk):
+
+
+  query_vector=embedings.embed_query(query)
+
+  results=collection.query(
+    query_embeddings=[query_vector],
+    n_results=topk
+  )
+
+  retrived_docs=results["documents"][0]
+  retrived_distances=results["distances"][0]
+  ids=results["ids"][0]
+  metadatas=results["metadatas"][0]
+  distances=results["distances"][0]
+  print(len(results["documents"]))
+
+  print(f"The Query : {query}")
+  print(f"TOP K : {topk}")
+
+  for index,(doc,dist,id,metadata,distance) in enumerate(zip(retrived_docs,retrived_distances,ids,metadatas,distances)):
+    print("\n")
+    print("-"*40)
+    print(f"Result : {index+1}")
+    print("\n")
+    print(f"\n chunk ID :{id}")
+    print("\n")
+    print(f"Chunk Text : {doc}")
+    print("\n")
+    print(f"Page : {metadata['page']}")
+    print("\n")
+    print(f"Source : {metadata['source']}")
+    print("\n")
+    print(f"Score : {distance}")
+
+
+print("Sample Outuput")
+queryresponse(embedings,samplequery,collection,sampletopk)
+
+print("\n")
+print("The above output is the sample output Please enter your query below...")
+
+print("\n\n")
+
+
+query=input("Enter the Query :")
+topk=int(input("Enter the TOP K value :"))
   
+queryresponse(embedings,query,collection,topk)
